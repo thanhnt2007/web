@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="admin/format/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+
+		<header th:replace="admin/format/header :: header"></header>
+		<!-- =============================================== -->
+
+		<!-- Left side column. contains the sidebar -->
+		<aside th:replace="/admin/format/aside :: aside"></aside>
+		<!-- =============================================== -->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Blank page <small>it all starts here</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#">Examples</a></li>
+					<li class="active">Blank page</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">Danh Sách Danh Mục</h3>
+					</div>
+					<div class="box-header with-border">
+						<a th:href="@{/admin/add-category}" class="btn btn-primary">Thêm Danh Mục</a>
+					</div>
+				<div th:replace="admin/format/formsearch :: search"></div>
+					<div class="box-body">
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<th style="width: 10px">ID</th>
+									<th>Tên Danh Mục</th>
+									<th>Hình Ảnh Danh Mục</th>
+									<th>Danh Sách Sản Phẩm Thuộc Danh Mục</th>
+									<th>Tùy Chỉnh Danh Mục</th>
+								</tr>
+								<tr th:each="category : ${list}">
+									<td th:text="${category.id}"></td>
+									<td th:text="${category.categoryName}"></td>
+									<td><img alt="" th:src="@{'/upload/'+${category.categoryImage}}"></td>
+									<td><a th:href="@{/admin/category/{id}(id=${category.id})}" th:text="${category.categoryName}">Category Name</a>
+									</td>
+									<td><a
+										th:href="@{/admin/edit-category/{id}(id=${category.id})}"
+										class="btn btn-success">Edit</a> <a
+										th:href="@{/admin/delete-category/{id}(id=${category.id})}"
+										onclick="return confirm('Bạn chắc chắn muốn xóa?')"
+										class="btn btn-danger">Delete</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				<div th:replace="admin/format/pageno :: pageno"></div>
+				</div>
+				<!-- /.box -->
+
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<footer th:replace="admin/format/footer :: footer"></footer>
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- jQuery 3 -->
+
+	<div th:replace="admin/format/scripts :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="admin/format/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+
+		<header th:replace="admin/format/header :: header"></header>
+		<!-- =============================================== -->
+
+		<!-- Left side column. contains the sidebar -->
+		<aside th:replace="/admin/format/aside :: aside"></aside>
+		<!-- =============================================== -->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Blank page <small>it all starts here</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#">Examples</a></li>
+					<li class="active">Blank page</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">Danh Sách Sản Phẩm</h3>
+					</div>
+
+					<form role="form" method="post" th:action="@{/admin/add-product}"
+						th:object="${product}" enctype="multipart/form-data">
+						<div class="box-body">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Tên Sản Phẩm</label> <input
+									type="text" class="form-control" id="exampleInputEmail1"
+									placeholder="Enter Product Name" th:field="*{productName}">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Image</label> <input type="file"
+									class="form-control" id="exampleInputEmail1"
+									placeholder="Enter Image" name="fileImage">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Giá Sản Phẩm</label> <input
+									type="text" class="form-control" id="exampleInputEmail1"
+									placeholder="Enter Product Price" th:field="*{price}">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Màu Sắc</label> <input
+									type="text" class="form-control" id="exampleInputEmail1"
+									placeholder="Enter Product Color" th:field="*{color}">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Nhà Sản Xuất</label> <input
+									type="text" class="form-control" id="exampleInputEmail1"
+									placeholder="Enter Manufacture" th:field="*{manufacture}">
+							</div>
+							<div class="form-group">
+								<label>Category</label> <select
+									class="form-control select2 select2-hidden-accessible"
+									style="width: 100%;" data-select2-id="1" tabindex="-1"
+									aria-hidden="true" th:field="*{category.id}">
+									<option th:each="category : ${listAdd}"
+										th:value="${category.id}" th:text="${category.categoryName}" />
+								</select>
+							</div>
+							<div class="form-group">
+							<label>Description</label>
+							<textarea name="editor1" id="editor1" rows="10" cols="80" th:field="*{description}">
+                					This is my textarea to be replaced with CKEditor 4.
+           					 </textarea>
+							</div>
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+					</form>
+					<div class="box-footer clearfix">
+						<ul class="pagination pagination-sm no-margin pull-right">
+							<li><a href="#">«</a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">»</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /.box -->
+
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<footer th:replace="admin/format/footer :: footer"></footer>
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- jQuery 3 -->
+
+	<div th:replace="admin/format/scripts :: scripts"></div>
+</body>
+</html>

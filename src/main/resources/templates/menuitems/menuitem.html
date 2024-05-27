@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="admin/format/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+
+		<header th:replace="admin/format/header :: header"></header>
+		<!-- =============================================== -->
+
+		<!-- Left side column. contains the sidebar -->
+		<aside th:replace="/admin/format/aside :: aside"></aside>
+		<!-- =============================================== -->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Blank page <small>it all starts here</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#">Examples</a></li>
+					<li class="active">Blank page</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-box-tool"
+								data-widget="remove" data-toggle="tooltip" title="Remove">
+								<i class="fa fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<div class="box-body" style="text-align: center;">
+						<table style="width: 50%; margin: 10px auto;">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Link</th>
+									<th>Order</th>
+									<th>Menu</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="menuItems : ${menuItems}">
+									<td th:text="${menuItems.menuItemName}"></td>
+									<td th:text="${menuItems.url}"></td>
+									<td th:text="${menuItems.oder}"></td>
+									
+									<td style="padding-left: 50px;"><a class="btn btn-success"
+										th:href="@{/admin/menuitem/edit/{id}(id=${menuItems.id})}">Edit</a>
+										<a class="btn btn-danger"
+										th:href="@{'/admin/menuitem/delete/' + ${menuItems.id}}" onclick="return confirm('Are you sure?')">Delete</a></td>
+								</tr>
+							</tbody>
+						</table>
+						<h4 style="text-align: center;">Create New Menu</h4>
+						<form th:action="@{/admin/menuitem}" th:object="${menuItem}"
+							method="post">
+							<div>
+								<label>Name: </label> <input
+									style="border-radius: 10px; height: 35px; width: 250px;"
+									type="text" th:field="*{menuItemName}"
+									placeholder="Enter Name Menu" />
+							</div>
+							<div style="margin: 15px 0;">
+								<label>URL: </label> <input
+									style="border-radius: 10px; height: 35px; width: 250px;"
+									type="text" th:field="*{url}" placeholder="Enter Url" />
+							</div>
+							<div>
+								<label>ODER: </label> <input
+									style="border-radius: 10px; height: 35px; width: 250px;"
+									type="text" th:field="*{oder}" placeholder="Enter Oder" />
+							</div>
+							<div>
+								<label>Menu:</label> <select
+									th:field="*{menu.id}">
+									<option th:each="menus : ${menus}" th:value="${menus.id}"
+										th:text="${menus.menuName}"></option>
+								</select>
+							</div>
+							<div>
+								<label>Parent Menu Item:</label> <select th:field="*{menuParent.id}">
+									<option th:if="${defaultParentMenuItem != null}"
+										th:value="${defaultParentMenuItem.id}"
+										th:text="${defaultParentMenuItem.menuItemName}"></option>
+									<option th:each="item : ${menuItems}" th:value="${item.id}"
+										th:text="${item.menuItemName}"></option>
+								</select>
+							</div>
+							<div>
+								<button class="btn btn-success" type="submit">Save</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- /.box -->
+
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<footer th:replace="admin/format/footer :: footer"></footer>
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- jQuery 3 -->
+
+	<div th:replace="admin/format/scripts :: scripts"></div>
+</body>
+</html>
